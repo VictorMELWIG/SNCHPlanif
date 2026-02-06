@@ -28,23 +28,23 @@ Dans le contexte de la gestion des trains et/ou des rails, la **SNCH (Société 
 
 ### 1) Description du contexte / besoin
 - [x] Proposer une **description claire du contexte** (en lien avec l’organisation choisie), en répondant :
-  - [x] Quelle est l’organisation ?
-  - [x] Quel est son problème / besoin ?
-  - [x] Quelle est la solution attendue (fonctionnalités) ?
-  - [x] Qui utilisera l’application (profils/acteurs) ?
+  - [x] Quelle est l’organisation ? ✅
+  - [x] Quel est son problème / besoin ? ✅
+  - [x] Quelle est la solution attendue (fonctionnalités) ? ✅
+  - [x] Qui utilisera l’application (profils/acteurs) ? ✅
 
 ### 2) Diagramme de cas d’utilisation
-- [x] Réaliser un **diagramme de cas d’utilisation** montrant :
+- [x] Réaliser un **diagramme de cas d’utilisation** ✅
   
 ### 3) Diagramme de classes métier
-- [x] Réaliser un **diagramme de classes métier** :
+- [x] Réaliser un **diagramme de classes métier** ✅
   
 ### 4) Maquettes (UI)
-- [ ] Produire les **maquettes des différents panels** (écrans) de l’application, expliquant le besoin :
-  - [x] Connexion
-  - [x] Menu Agent
-  - [x] Menu Planificateur
-  - [x] Gestion itinéraires
+- [x] Produire les **maquettes des différents panels** (écrans) de l’application, expliquant le besoin :
+  - [x] Connexion ✅
+  - [x] Menu Agent ✅
+  - [x] Menu Planificateur ✅
+  - [x] Gestion itinéraires ✅
   
 
 ### 5) Planification (Gantt v0)
