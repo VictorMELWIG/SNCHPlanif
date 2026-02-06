@@ -28,29 +28,24 @@ Dans le contexte de la gestion des trains et/ou des rails, la **SNCH (Société 
 
 ### 1) Description du contexte / besoin
 - [x] Proposer une **description claire du contexte** (en lien avec l’organisation choisie), en répondant :
-  - [ ] Quelle est l’organisation ?
-  - [ ] Quel est son problème / besoin ?
-  - [ ] Quelle est la solution attendue (fonctionnalités) ?
-  - [ ] Qui utilisera l’application (profils/acteurs) ?
+  - [x] Quelle est l’organisation ?
+  - [x] Quel est son problème / besoin ?
+  - [x] Quelle est la solution attendue (fonctionnalités) ?
+  - [x] Qui utilisera l’application (profils/acteurs) ?
 
 ### 2) Diagramme de cas d’utilisation
-- [ ] Réaliser un **diagramme de cas d’utilisation** montrant :
-  - [ ] Les acteurs (ex : Agent de billetterie, Planificateur, Admin)
-  - [ ] Les fonctionnalités associées à chaque acteur
-
+- [x] Réaliser un **diagramme de cas d’utilisation** montrant :
+  
 ### 3) Diagramme de classes métier
-- [ ] Réaliser un **diagramme de classes métier** :
-  - [ ] Concepts (classes) + attributs
-  - [ ] Relations + **cardinalités**
-  - [ ] Cohérent avec le besoin (clients, billets, trajets, itinéraires, trains, types de billet, utilisateurs...)
-
+- [x] Réaliser un **diagramme de classes métier** :
+  
 ### 4) Maquettes (UI)
 - [ ] Produire les **maquettes des différents panels** (écrans) de l’application, expliquant le besoin :
-  - [ ] Connexion
-  - [ ] Menu Agent
-  - [ ] Menu Planificateur
-  - [ ] Gestion itinéraires
-  - [ ] (optionnel selon ton projet) vente billet / consultation billets / gestion clients / trajets
+  - [x] Connexion
+  - [x] Menu Agent
+  - [x] Menu Planificateur
+  - [x] Gestion itinéraires
+  
 
 ### 5) Planification (Gantt v0)
 - [ ] Produire une **planification préliminaire v0 (diagramme de Gantt)** :
