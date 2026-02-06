@@ -1,42 +1,79 @@
-## Projet MyEasyTrain avec JavaFX
-## Description des attendus 
-Lancement fev 2026 (Mme DHOUIB)
+# Projet SNCH Billetterie avec JavaFX
+## Description des attendus
+**Lancement : février 2026** (Mme DHOUIB)
 
-***Un Ticket Github*** sera créé pour demander la validation de l'étape avec toutes les parties complétées ou modifiées !
+> Un **ticket GitHub** sera créé pour demander la validation de l’étape, avec toutes les parties complétées ou modifiées.
 
+---
 
-### Contexte
+## Contexte
+Dans le contexte de la gestion des trains et/ou des rails, la **SNCH (Société Nationale des Trains Hypothétique)** exprime le besoin d’une solution logicielle **Desktop (client lourd)** afin d’aider ses services internes dans la gestion métier de leurs activités (billetterie et planification).
 
-Dans le contexte de La Gestion des trains et/ou des rails (MyEasyTrain), un service général ou particulier exprime le besoin d'une solution logicielle de type `Desktop` pour les aider dans la gestion métier de leurs activités. 
+---
 
-### Modalité
+## Modalité
+- Travail individuel
 
-- travail individuel 
+---
 
+## Contraintes techniques obligatoires
+- [ ] Langage : **Java**
+- [ ] Framework de présentation : **JavaFX**
+- [ ] Données : **BDD SQL accessible sur Internet**
+- [ ] Gestion du code : **Git** sur un projet dédié partagé sur **GitHub.com**
 
-#### Contraintes techniques obligatoires : 
+---
 
-- Langage utilisé : Java
-- Framework de présentation : JavaFX
-- Données : BDD SQL accessible sur Internet 
-- Gestion du code : via Git sur un projet dédié partagé sur GitHub.com
+## Étape 1 — Formalisation du besoin (Cahier des charges)
 
-#### Etape 1 : Formalisation du besoin du client MyEasyTrain (Cahier des charges) 
+### 1) Description du contexte / besoin
+- [ ] Proposer une **description claire du contexte** (en lien avec l’organisation choisie), en répondant :
+  - [ ] Quelle est l’organisation ?
+  - [ ] Quel est son problème / besoin ?
+  - [ ] Quelle est la solution attendue (fonctionnalités) ?
+  - [ ] Qui utilisera l’application (profils/acteurs) ?
 
-- [X] Proposer une **description claire du contexte** particulier du besoin (en rapport avec l'organisation choisie) 
-	- Quelle est l'organisation ?
-	- Quelle est son problème ?
-	- Quelle est la solution qu'elle attend (fonctionnalités) et elle sera utilisée par qui ?
+### 2) Diagramme de cas d’utilisation
+- [ ] Réaliser un **diagramme de cas d’utilisation** montrant :
+  - [ ] Les acteurs (ex : Agent de billetterie, Planificateur, Admin)
+  - [ ] Les fonctionnalités associées à chaque acteur
 
-- [X] Proposer en rapport avec cette description un **diagramme de cas d'utilisation** qui montre les acteurs du système et leurs fonctionnalités
-- [X] Proposer **un diagramme de classes métier** qui montre les différents concepts concrêts (exemple : utilisateurs, employés, chambres d'hôtéls...) et abstrait (équipes, services, réservations...) de votre contexte. *Un diagramme de classes montre les concepts, leur description (attributs) et les relations entre elles avec leurs cardinalités*.
-- [X] Maquette des différents panels qui explicite le besoin. 
+### 3) Diagramme de classes métier
+- [ ] Réaliser un **diagramme de classes métier** :
+  - [ ] Concepts (classes) + attributs
+  - [ ] Relations + **cardinalités**
+  - [ ] Cohérent avec le besoin (clients, billets, trajets, itinéraires, trains, types de billet, utilisateurs...)
 
-- [X] **Planification préliminaire du projet v0** : Un Gantt est attendu (tableau bidemensionnel qui trace la planification des différentes tâches relatives au projet dans le temps (une tâche par ligne, une unité de temps  par colonne).  Chaque cellule sera colorée selon les affectations aux membres de l'équipe. ([Article](https://fr.venngage.com/blog/modeles-diagrammes-gantt-projet/) à ce sujet)
+### 4) Maquettes (UI)
+- [ ] Produire les **maquettes des différents panels** (écrans) de l’application, expliquant le besoin :
+  - [ ] Connexion
+  - [ ] Menu Agent
+  - [ ] Menu Planificateur
+  - [ ] Gestion itinéraires
+  - [ ] (optionnel selon ton projet) vente billet / consultation billets / gestion clients / trajets
 
-**La documentation** doit être complète et bien identifiée (Titre, Auteur(s), date, pagination) et sous format PDF. --> **Date Rendu 17 février 2026**
- 
-***Un Ticket Github*** sera créé pour demander la validation de l'étape avec toutes les parties complétées ou modifiées !
+### 5) Planification (Gantt v0)
+- [ ] Produire une **planification préliminaire v0 (diagramme de Gantt)** :
+  - [ ] 1 tâche par ligne
+  - [ ] 1 unité de temps par colonne
+  - [ ] Mise en évidence des périodes de réalisation  
+  - [ ] Ressource utile : modèle de Gantt (Venngage) *(lien dans ta doc si besoin)*
+
+---
+
+## Rendu documentaire
+- [ ] La documentation est **complète et bien identifiée** :
+  - [ ] Titre
+  - [ ] Auteur(s)
+  - [ ] Date
+  - [ ] Pagination
+- [ ] Format : **PDF**
+- [ ] **Date de rendu : 17 février 2026**
+
+---
+
+> Un **ticket GitHub** sera créé pour demander la validation de l’étape, avec toutes les parties complétées ou modifiées.
+
 
 #### Etape 2 : Conception de la solution (Cahier Technique) 
 
