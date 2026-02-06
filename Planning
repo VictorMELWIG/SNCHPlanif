@@ -1,15 +1,1 @@
-| V0    | Tâche (v0)                                       | Statut   | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 |
-| ----- | ------------------------------------------------ | -------- | -: | -: | -: | -: | -: | -: | -: | -: | -: | -: | -: | -: | -: |
-| V0-1  | Création projet + GitHub + Maven/JavaFX          | Fait     |  X |  X |    |    |    |    |    |    |    |    |    |    |    |
-| V0-2  | Connexion BDD + DBConnection + tests             | Fait     |    |  X |  X |    |    |    |    |    |    |    |    |    |    |
-| V0-3  | Login (FXML + controller) + Session              | Fait     |    |  X |  X |    |    |    |    |    |    |    |    |    |    |
-| V0-4  | Navigation (SceneManager) + taille fenêtre       | Fait     |    |  X |    |    |    |    |    |    |    |    |    |    |    |
-| V0-5  | Gestion rôles (Agent/Planif/Admin) + menus       | Fait     |    |  X |  X |    |    |    |    |    |    |    |    |    |    |
-| V0-6  | Sécurité d’accès (AuthGuard)                     | Fait     |    |  X |  X |    |    |    |    |    |    |    |    |    |    |
-| V0-7  | CRUD Itinéraires (DAO + UI + tests)              | Fait     |    |  X |  X |  X |    |    |    |    |    |    |    |    |    |
-| V0-8  | Diagramme cas d’utilisation (UML)                | Fait     |    |  X |  X |    |    |    |    |    |    |    |    |    |    |
-| V0-9  | Diagramme de classes métier (UML + cardinalités) | En cours |    |  X |  X |  X |    |    |    |    |    |    |    |    |    |
-| V0-10 | Maquettes (PNG)                                  | Fait     |    |  X |  X |    |    |    |    |    |    |    |    |    |    |
-| V0-11 | Gantt v0 (planning préliminaire)                 | fait     |    |  X |    |    |    |    |    |    |    |    |    |    |    |
-| V0-12 | Mise en forme Word → export PDF                  | À faire  |    |    |    |    |    |    |    |    |    |    |    |    |    |
-| V0-13 | Dépôt GitHub + Ticket validation Étape 1         | À faire  |    |    |    |    |    |    |    |    |    |    |    |    |    |
+
