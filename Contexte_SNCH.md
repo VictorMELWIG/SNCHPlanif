@@ -17,17 +17,17 @@ Dans le contexte de la gestion des trains et/ou des rails, la **SNCH (Société 
 ---
 
 ## Contraintes techniques obligatoires
-- [ ] Langage : **Java**
-- [ ] Framework de présentation : **JavaFX**
-- [ ] Données : **BDD SQL accessible sur Internet**
-- [ ] Gestion du code : **Git** sur un projet dédié partagé sur **GitHub.com**
+-Langage : **Java**
+-Framework de présentation : **JavaFX**
+-Données : **BDD SQL accessible sur Internet**
+-Gestion du code : **Git** sur un projet dédié partagé sur **GitHub.com**
 
 ---
 
 ## Étape 1 — Formalisation du besoin (Cahier des charges)
 
 ### 1) Description du contexte / besoin
-- [ ] Proposer une **description claire du contexte** (en lien avec l’organisation choisie), en répondant :
+- [x] Proposer une **description claire du contexte** (en lien avec l’organisation choisie), en répondant :
   - [ ] Quelle est l’organisation ?
   - [ ] Quel est son problème / besoin ?
   - [ ] Quelle est la solution attendue (fonctionnalités) ?
