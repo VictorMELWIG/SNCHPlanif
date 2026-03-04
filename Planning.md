@@ -1,4 +1,4 @@
-## Planification préliminaire du projet v0 (Gantt) — SNCH Billetterie
+## Planification préliminaire du projet v0 — SNCH Billetterie
 
 | V0    | Tâche                                                    | Statut   |05|06|07|08|09|10|11|12|13|14|15|16|17|
 |-------|----------------------------------------------------------|----------|--|--|--|--|--|--|--|--|--|--|--|--|--|
