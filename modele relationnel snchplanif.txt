@@ -2,35 +2,40 @@ modele relationnel snchplanif
 
 
 ARRET(
-  idArret PK,
+  idArret, 
   nom
 )
+clé primaire : idArret
 
 ITINERAIRE(
-  idItineraire PK,
+  idItineraire,
   dureePrevue
 )
+clé primaire : idItineraire
 
 TRAIN(
-  idTrain PK,
+  idTrain,
   numeroTrain,
-  typeTrain
+  typeTrain : ENUM ( "TGV", "TER")
 )
+clé primaire : idTrain
 
 TRAJET(
-  idTrajet PK,
+  idTrajet,
   dateHeureDepart,
   dateHeureArrivee,
-
-  idTrain FK → TRAIN(idTrain),
-  idItineraire FK → ITINERAIRE(idItineraire),
-
-  idArretDepart FK → ARRET(idArret),
-  idArretArrive FK → ARRET(idArret)
+  idTrain, 
+  idArretDepart,
+  idArretArrive,
 )
+clé primaire : idTrajet 
+clé étrangère : idTrain référence à TRAIN(idTrain)
+idArretDepart référence à ARRET(idArret)
+idArretArrive référence à ARRET(idArret)
+
 
 UTILISATEUR(
-  idUtilisateur PK,
+  idUtilisateur,
   login,
   motDePasse,
   nom,
@@ -38,8 +43,10 @@ UTILISATEUR(
   email,
   role
 )
+clé primaire : idUtilisateur
 
 ROLE(
   PLANIFICATEUR,
   ADMIN
+
 )
