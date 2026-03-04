@@ -38,12 +38,13 @@ idArretArrive référence à ARRET(idArret)
 UTILISATEUR(
   idUtilisateur : INT AUTO_INCREMENT,
   login : VARCHAR(100),
-  motDePasse : 256,
+  motDePasse : VARCHAR(255),
   nom : VARCHAR(100),
   prenom : VARCHAR(100),
   email : VARCHAR(100),
-  role : ENUM (plannificateur, admin),
+  role : ENUM (PLANNIFICATEUR, ADMIN),
 )       
 clé primaire : idUtilisateur
+
 
 
