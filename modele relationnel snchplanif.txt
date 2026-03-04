@@ -1,0 +1,45 @@
+modele relationnel snchplanif
+
+
+ARRET(
+  idArret PK,
+  nom
+)
+
+ITINERAIRE(
+  idItineraire PK,
+  dureePrevue
+)
+
+TRAIN(
+  idTrain PK,
+  numeroTrain,
+  typeTrain
+)
+
+TRAJET(
+  idTrajet PK,
+  dateHeureDepart,
+  dateHeureArrivee,
+
+  idTrain FK → TRAIN(idTrain),
+  idItineraire FK → ITINERAIRE(idItineraire),
+
+  idArretDepart FK → ARRET(idArret),
+  idArretArrive FK → ARRET(idArret)
+)
+
+UTILISATEUR(
+  idUtilisateur PK,
+  login,
+  motDePasse,
+  nom,
+  prenom,
+  email,
+  role
+)
+
+ROLE(
+  PLANIFICATEUR,
+  ADMIN
+)
