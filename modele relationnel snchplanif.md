@@ -10,29 +10,29 @@ clé primaire : idArret
 
 ITINERAIRE(
   idItineraire : INT AUTO_INCREMENT,
-  dureePrevue : INT,
+  dureePrevue : INT
 )         
 clé primaire : idItineraire
 
 TRAIN(
   idTrain : INT AUTO_INCREMENT,
-  numeroTrain : VARCHAR(100),
-  typeTrain : ENUM ( "TGV", "TER"),
+  numeroTrain : VARCHAR(10),
+  typeTrain : ENUM ( "TGV", "TER")
 )    
 clé primaire : idTrain
 
 TRAJET(
   idTrajet : INT AUTO_INCREMENT,
   dateHeureDepart : DATETIME,
-  dateHeureArrivee : DATETIME
-  idTrain, 
-  idArretDepart,
-  idArretArrive,
+  dateHeureArrivee : DATETIME,
+  idTrain INT, 
+  idArretDepart INT,
+  idArretArrive INT
 )      
 clé primaire : idTrajet      
-clé étrangère : idTrain référence à TRAIN(idTrain)
-idArretDepart référence à ARRET(idArret)
-idArretArrive référence à ARRET(idArret)
+clé étrangère : idTrain référence à TRAIN(idTrain)    
+idArretDepart référence à ARRET(idArret)     
+idArretArrive référence à ARRET(idArret)    
 
 
 UTILISATEUR(
@@ -42,9 +42,10 @@ UTILISATEUR(
   nom : VARCHAR(100),
   prenom : VARCHAR(100),
   email : VARCHAR(100),
-  role : ENUM (PLANNIFICATEUR, ADMIN),
+  role : ENUM (PLANNIFICATEUR, ADMIN)
 )       
 clé primaire : idUtilisateur
+
 
 
 
