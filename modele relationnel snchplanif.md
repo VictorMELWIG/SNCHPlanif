@@ -2,28 +2,28 @@ modele relationnel snchplanif
 
 
 ARRET(
-  idArret, 
-  nom
+  idArret :  INT AUTO_INCREMENT
+  nom : VARCHAR(100)
 )
 clé primaire : idArret
 
 ITINERAIRE(
-  idItineraire,
-  dureePrevue
+  idItineraire : INT AUTO_INCREMENT
+  dureePrevue : INT
 )    
 clé primaire : idItineraire
 
 TRAIN(
-  idTrain,
-  numeroTrain,
+  idTrain : INT AUTO_INCREMENT
+  numeroTrain : VARCHAR(100)
   typeTrain : ENUM ( "TGV", "TER")
 )    
 clé primaire : idTrain
 
 TRAJET(
-  idTrajet,
-  dateHeureDepart,
-  dateHeureArrivee,
+  idTrajet : INT AUTO_INCREMENT
+  dateHeureDepart : DATETIME
+  dateHeureArrivee : DATETIME
   idTrain, 
   idArretDepart,
   idArretArrive,
@@ -35,12 +35,13 @@ idArretArrive référence à ARRET(idArret)
 
 
 UTILISATEUR(
-  idUtilisateur,
-  login,
+  idUtilisateur : INT AUTO_INCREMENT
+  login : VARCHAR(100)
   motDePasse : 256
-  nom,
-  prenom,
-  email,
+  nom : VARCHAR(100)
+  prenom : VARCHAR(100)
+  email : VARCHAR(100)
   role : ENUM (plannificateur, admin)
 )       
 clé primaire : idUtilisateur
+
