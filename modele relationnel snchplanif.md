@@ -49,7 +49,7 @@ clé primaire : idUtilisateur
 ITINERAIRE_TRAJET(
   idItineraire : INT,
   idTrajet : INT
-)
+)    
 Clé primaire : (idItineraire, idTrajet)
 Clé étrangère : idItineraire référence à ITINERAIRE(idItineraire)
 Clé étrangère : idTrajet référence à TRAJET(idTrajet)
