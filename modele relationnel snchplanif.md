@@ -42,10 +42,16 @@ UTILISATEUR(
   nom : VARCHAR(100),
   prenom : VARCHAR(100),
   email : VARCHAR(100),
-  role : ENUM (PLANNIFICATEUR, ADMIN)
+  role : ENUM (PLANNIFICATEUR, ADMIN, AGENT)
 )       
 clé primaire : idUtilisateur
 
-
+ITINERAIRE_TRAJET(
+  idItineraire : INT,
+  idTrajet : INT
+)
+Clé primaire : (idItineraire, idTrajet)
+Clé étrangère : idItineraire référence à ITINERAIRE(idItineraire)
+Clé étrangère : idTrajet référence à TRAJET(idTrajet)
 
 
