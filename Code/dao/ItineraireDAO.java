@@ -1,23 +1,24 @@
 package snchbilletterie.dao;
 
+import snchbilletterie.model.Arret;
 import snchbilletterie.model.Itineraire;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ItineraireDAO {
 
-    private static final Map<Integer, String[]> villesParItineraire = new HashMap<>();
-
-    public static void enregistrerVilles(int idItineraire, String depart, String arrivee) {
-        villesParItineraire.put(idItineraire, new String[]{depart, arrivee});
-    }
-
     public List<Itineraire> findAll() {
-        String sql = "SELECT id_itineraire, duree_prevue FROM itineraire ORDER BY id_itineraire DESC";
+        String sql = """
+            SELECT i.id_itineraire, i.duree_prevue_min,
+                   ad.id_arret AS id_dep, ad.nom AS nom_dep,
+                   aa.id_arret AS id_arr, aa.nom AS nom_arr
+            FROM itineraire i
+            JOIN arret ad ON ad.id_arret = i.id_arret_depart
+            JOIN arret aa ON aa.id_arret = i.id_arret_arrive
+            ORDER BY i.id_itineraire DESC
+        """;
         List<Itineraire> list = new ArrayList<>();
 
         try (Connection cnx = DBConnection.getConnection();
@@ -25,18 +26,28 @@ public class ItineraireDAO {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                Itineraire iti = new Itineraire(
-                        rs.getInt("id_itineraire"),
-                        rs.getInt("duree_prevue")
-                );
+                Arret dep = new Arret(rs.getInt("id_dep"), rs.getString("nom_dep"));
+                Arret arr = new Arret(rs.getInt("id_arr"), rs.getString("nom_arr"));
+                list.add(new Itineraire(rs.getInt("id_itineraire"), rs.getInt("duree_prevue_min"), dep, arr));
+            }
 
-                String[] villes = villesParItineraire.get(iti.getIdItineraire());
-                if (villes != null) {
-                    iti.setVilleDepart(villes[0]);
-                    iti.setVilleArrivee(villes[1]);
-                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-                list.add(iti);
+        return list;
+    }
+
+    public List<Arret> findAllArrets() {
+        List<Arret> list = new ArrayList<>();
+        String sql = "SELECT id_arret, nom FROM arret ORDER BY nom";
+
+        try (Connection cnx = DBConnection.getConnection();
+             PreparedStatement ps = cnx.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                list.add(new Arret(rs.getInt("id_arret"), rs.getString("nom")));
             }
 
         } catch (Exception e) {
@@ -51,18 +62,18 @@ public class ItineraireDAO {
     }
 
     public int insertAndReturnId(Itineraire it) {
-        String sql = "INSERT INTO itineraire(duree_prevue) VALUES(?)";
+        String sql = "INSERT INTO itineraire(duree_prevue_min, id_arret_depart, id_arret_arrive) VALUES(?, ?, ?)";
 
         try (Connection cnx = DBConnection.getConnection();
              PreparedStatement ps = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setInt(1, it.getDureePrevue());
+            ps.setInt(2, it.getArretDepart().getIdArret());
+            ps.setInt(3, it.getArretArrive().getIdArret());
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
+                if (rs.next()) return rs.getInt(1);
             }
 
         } catch (Exception e) {
@@ -73,13 +84,15 @@ public class ItineraireDAO {
     }
 
     public boolean update(Itineraire it) {
-        String sql = "UPDATE itineraire SET duree_prevue=? WHERE id_itineraire=?";
+        String sql = "UPDATE itineraire SET duree_prevue_min=?, id_arret_depart=?, id_arret_arrive=? WHERE id_itineraire=?";
 
         try (Connection cnx = DBConnection.getConnection();
              PreparedStatement ps = cnx.prepareStatement(sql)) {
 
             ps.setInt(1, it.getDureePrevue());
-            ps.setInt(2, it.getIdItineraire());
+            ps.setInt(2, it.getArretDepart().getIdArret());
+            ps.setInt(3, it.getArretArrive().getIdArret());
+            ps.setInt(4, it.getIdItineraire());
 
             return ps.executeUpdate() == 1;
 
@@ -97,11 +110,8 @@ public class ItineraireDAO {
 
             try (PreparedStatement check = cnx.prepareStatement(checkSql)) {
                 check.setInt(1, idItineraire);
-
                 try (ResultSet rs = check.executeQuery()) {
-                    if (rs.next() && rs.getInt(1) > 0) {
-                        return false;
-                    }
+                    if (rs.next() && rs.getInt(1) > 0) return false;
                 }
             }
 
@@ -114,39 +124,5 @@ public class ItineraireDAO {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public Integer findOrCreateArret(String nom) {
-        String selectSql = "SELECT id_arret FROM arret WHERE nom = ?";
-        String insertSql = "INSERT INTO arret(nom) VALUES(?)";
-
-        try (Connection cnx = DBConnection.getConnection()) {
-
-            try (PreparedStatement ps = cnx.prepareStatement(selectSql)) {
-                ps.setString(1, nom.trim());
-
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        return rs.getInt("id_arret");
-                    }
-                }
-            }
-
-            try (PreparedStatement ps = cnx.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setString(1, nom.trim());
-                ps.executeUpdate();
-
-                try (ResultSet rs = ps.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        return rs.getInt(1);
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 }
