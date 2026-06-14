@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="snchbilletterie.controller.AdminMenuController"
+      alignment="CENTER" spacing="12">
+
+    <Label text="Espace Administrateur"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <Button text="Gestion itinéraires" onAction="#goItineraires" maxWidth="260"/>
+    <Button text="Gestion trains" onAction="#goTrains" maxWidth="260"/>
+    <Button text="Planifier un trajet" onAction="#goTrajets" maxWidth="260"/>
+    <Button text="Gestion utilisateurs" onAction="#goUtilisateurs" maxWidth="260"/>
+
+    <Button text="Déconnexion" onAction="#logout" maxWidth="260"/>
+</VBox>

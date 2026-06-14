@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="snchbilletterie.controller.UtilisateurController">
+
+    <top>
+        <VBox spacing="8" style="-fx-background-color: white;">
+            <padding>
+                <Insets top="12" right="12" bottom="6" left="12"/>
+            </padding>
+            <Label text="Gestion des utilisateurs"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Separator/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </padding>
+
+            <!-- TABLE -->
+            <HBox alignment="CENTER">
+                <TableView fx:id="table" prefHeight="300" maxWidth="700">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="colLogin" text="Login" prefWidth="130"/>
+                        <TableColumn fx:id="colNom" text="Nom" prefWidth="130"/>
+                        <TableColumn fx:id="colPrenom" text="Prénom" prefWidth="130"/>
+                        <TableColumn fx:id="colRole" text="Rôle" prefWidth="130"/>
+                        <TableColumn fx:id="colActif" text="Actif" prefWidth="80"/>
+                    </columns>
+                </TableView>
+            </HBox>
+
+            <!-- FORMULAIRE -->
+            <HBox alignment="CENTER">
+                <GridPane hgap="10" vgap="10" maxWidth="520">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="140"/>
+                        <ColumnConstraints prefWidth="380"/>
+                    </columnConstraints>
+
+                    <Label text="Login :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tfLogin" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Mot de passe :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tfMotDePasse" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Nom :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tfNom" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Prénom :" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tfPrenom" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Rôle :" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="cbRole" promptText="Choisir..." GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                </GridPane>
+            </HBox>
+
+            <!-- BOUTONS -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Ajouter" onAction="#add" minWidth="90"/>
+                <Button text="Modifier" onAction="#update" minWidth="90"/>
+                <Button text="Supprimer" onAction="#delete" minWidth="90"/>
+                <Button text="Activer/Désactiver" onAction="#toggleActif" minWidth="130"/>
+                <Button text="Rafraîchir" onAction="#refresh" minWidth="90"/>
+                <Button text="Vider" onAction="#clearForm" minWidth="90"/>
+                <Button text="Retour" onAction="#goBack" minWidth="90"/>
+            </HBox>
+
+            <HBox alignment="CENTER">
+                <Label fx:id="lblInfo" textFill="red"/>
+            </HBox>
+
+        </VBox>
+    </center>
+</BorderPane>

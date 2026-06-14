@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="snchbilletterie.controller.LoginController">
+
+    <center>
+        <VBox spacing="10" alignment="CENTER" maxWidth="360">
+            <padding>
+                <Insets top="30" right="30" bottom="30" left="30"/>
+            </padding>
+
+            <Label text="SNCH Billetterie - Connexion"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <TextField fx:id="tfLogin" promptText="Login"/>
+            <PasswordField fx:id="pfPassword" promptText="Mot de passe"/>
+
+            <Button fx:id="btnLogin" defaultButton="true"
+                    text="Se connecter" onAction="#handleLogin" maxWidth="Infinity"/>
+
+            <Label fx:id="lblInfo" textFill="red"/>
+        </VBox>
+    </center>
+</BorderPane>

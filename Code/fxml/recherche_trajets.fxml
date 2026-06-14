@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="snchbilletterie.controller.RechercheTrajetsController">
+
+    <top>
+        <Label text="Rechercher un trajet"
+               BorderPane.alignment="CENTER"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;">
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </padding>
+        </Label>
+    </top>
+
+    <center>
+        <VBox spacing="12" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <GridPane hgap="10" vgap="10" maxWidth="720">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="30"/>
+                    <ColumnConstraints percentWidth="70"/>
+                </columnConstraints>
+
+                <Label text="Date départ :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dpDate" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Ville départ :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="tfDepart" promptText="ex: Paris" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Ville arrivée :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="tfArrivee" promptText="ex: Lyon" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Rechercher" onAction="#search" minWidth="120"/>
+                <Button text="Tout afficher" onAction="#reset" minWidth="120"/>
+            </HBox>
+
+            <TableView fx:id="table" maxWidth="900" prefHeight="360">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                    <TableColumn fx:id="colDate" text="Date" prefWidth="120"/>
+                    <TableColumn fx:id="colHeureDep" text="Départ" prefWidth="100"/>
+                    <TableColumn fx:id="colHeureArr" text="Arrivée" prefWidth="110"/>
+                    <TableColumn fx:id="colDepart" text="Ville départ" prefWidth="180"/>
+                    <TableColumn fx:id="colArrivee" text="Ville arrivée" prefWidth="180"/>
+                    <TableColumn fx:id="colTrain" text="Train" prefWidth="130"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="btnSelect" text="Sélectionner" onAction="#selectTrajet" minWidth="140"/>
+                <Button text="Retour" onAction="#goBack" minWidth="140"/>
+            </HBox>
+
+            <Label fx:id="lblInfo" textFill="red"/>
+        </VBox>
+    </center>
+</BorderPane>

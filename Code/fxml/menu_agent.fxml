@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="snchbilletterie.controller.AgentMenuController"
+      alignment="CENTER" spacing="12">
+
+    <Label text="Espace Agent de billetterie"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <Button text="Rechercher trajets" onAction="#goRechercheTrajets" maxWidth="260"/>
+    <Button text="Déconnexion" onAction="#logout" maxWidth="260"/>
+</VBox>

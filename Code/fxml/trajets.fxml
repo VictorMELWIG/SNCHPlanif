@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="snchbilletterie.controller.TrajetController">
+
+    <top>
+        <Label text="Planifier un trajet" BorderPane.alignment="CENTER"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;">
+            <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+        </Label>
+    </top>
+
+    <center>
+        <VBox spacing="12">
+            <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+
+            <HBox alignment="CENTER">
+                <TableView fx:id="table" prefHeight="280" maxWidth="800">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="colDepart" text="Départ" prefWidth="160"/>
+                        <TableColumn fx:id="colArrivee" text="Arrivée" prefWidth="160"/>
+                        <TableColumn fx:id="colTrain" text="Train" prefWidth="160"/>
+                        <TableColumn fx:id="colIti" text="Itinéraire" prefWidth="220"/>
+                    </columns>
+                </TableView>
+            </HBox>
+
+            <HBox alignment="CENTER">
+                <GridPane hgap="10" vgap="10" maxWidth="760">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="160"/>
+                        <ColumnConstraints prefWidth="600"/>
+                    </columnConstraints>
+
+                    <Label text="Date départ :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="dpDate" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Heure départ (HH:mm) :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tfHeureDepart" promptText="08:15" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Heure arrivée (auto) :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tfHeureArrivee" editable="false" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Train :" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="cbTrain" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Itinéraire :" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="cbItineraire" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                </GridPane>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Ajouter" onAction="#add" minWidth="90"/>
+                <Button text="Modifier" onAction="#update" minWidth="90"/>
+                <Button text="Supprimer" onAction="#delete" minWidth="90"/>
+                <Button text="Rafraîchir" onAction="#refresh" minWidth="90"/>
+                <Button text="Vider" onAction="#clearForm" minWidth="90"/>
+                <Button text="Retour" onAction="#goBack" minWidth="90"/>
+            </HBox>
+
+            <HBox alignment="CENTER">
+                <Label fx:id="lblInfo" textFill="red"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
