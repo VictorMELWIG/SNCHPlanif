@@ -13,6 +13,7 @@ import snchbilletterie.model.Role;
 import snchbilletterie.model.Trajet;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RechercheTrajetsController {
 
@@ -22,7 +23,7 @@ public class RechercheTrajetsController {
 
     @FXML private TableView<Trajet> table;
     @FXML private TableColumn<Trajet, Integer> colId;
-    @FXML private TableColumn<Trajet, LocalDate> colDate;
+    @FXML private TableColumn<Trajet, String> colDate;
     @FXML private TableColumn<Trajet, String> colHeureDep;
     @FXML private TableColumn<Trajet, String> colHeureArr;
     @FXML private TableColumn<Trajet, String> colDepart;
@@ -33,6 +34,8 @@ public class RechercheTrajetsController {
     @FXML private Label lblInfo;
 
     private final TrajetDAO dao = new TrajetDAO();
+    private final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern("HH:mm");
 
     @FXML
     private void initialize() {
@@ -41,26 +44,34 @@ public class RechercheTrajetsController {
         table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         colId.setCellValueFactory(new PropertyValueFactory<>("idTrajet"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("dateDepart"));
+
+        colDate.setCellValueFactory(c -> new SimpleStringProperty(
+                c.getValue().getDateHeureDepart() != null
+                        ? c.getValue().getDateHeureDepart().format(DATE_FMT) : ""
+        ));
 
         colHeureDep.setCellValueFactory(c -> new SimpleStringProperty(
-                c.getValue().getHeureDepart() == null ? "" : c.getValue().getHeureDepart().toString()
+                c.getValue().getDateHeureDepart() != null
+                        ? c.getValue().getDateHeureDepart().format(TIME_FMT) : ""
         ));
 
         colHeureArr.setCellValueFactory(c -> new SimpleStringProperty(
-                c.getValue().getHeureArriveePrevue() == null ? "" : c.getValue().getHeureArriveePrevue().toString()
+                c.getValue().getDateHeureArrivee() != null
+                        ? c.getValue().getDateHeureArrivee().format(TIME_FMT) : ""
         ));
 
         colDepart.setCellValueFactory(c -> new SimpleStringProperty(
-                String.valueOf(c.getValue().getIdArretDepart())
+                c.getValue().getItineraire() != null
+                        ? c.getValue().getItineraire().getVilleDepart() : ""
         ));
 
         colArrivee.setCellValueFactory(c -> new SimpleStringProperty(
-                String.valueOf(c.getValue().getIdArretArrive())
+                c.getValue().getItineraire() != null
+                        ? c.getValue().getItineraire().getVilleArrivee() : ""
         ));
 
         colTrain.setCellValueFactory(c -> new SimpleStringProperty(
-                c.getValue().getTrain() == null ? "" : c.getValue().getTrain().getNumeroTrain()
+                c.getValue().getTrain() != null ? c.getValue().getTrain().toString() : ""
         ));
 
         if (btnSelect != null) {
@@ -96,7 +107,6 @@ public class RechercheTrajetsController {
 
         var res = dao.search(date, depart, arrivee);
         table.setItems(FXCollections.observableArrayList(res));
-
         lblInfo.setText(res.isEmpty() ? "Aucun trajet trouvé." : "");
     }
 
@@ -113,19 +123,16 @@ public class RechercheTrajetsController {
     @FXML
     public void selectTrajet() {
         Trajet selected = table.getSelectionModel().getSelectedItem();
-
         if (selected == null) {
             lblInfo.setText("Sélectionne un trajet.");
             return;
         }
-
         Session.selectedTrajet = selected;
-        SceneManager.show("/snchbilletterie/view/vente_billet.fxml", "SNCH - Vendre un billet");
+        SceneManager.show("/snchbilletterie/view/menu_agent.fxml", "SNCH - Agent");
     }
 
     @FXML
     public void goBack() {
         SceneManager.show("/snchbilletterie/view/menu_agent.fxml", "SNCH - Agent");
     }
-
 }

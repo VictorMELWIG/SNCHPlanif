@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import snchbilletterie.app.AuthGuard;
 import snchbilletterie.app.SceneManager;
 import snchbilletterie.dao.ItineraireDAO;
+import snchbilletterie.model.Arret;
 import snchbilletterie.model.Itineraire;
 import snchbilletterie.model.Role;
 
@@ -19,8 +20,8 @@ public class ItineraireController {
     @FXML private TableColumn<Itineraire, String> colArrivee;
     @FXML private TableColumn<Itineraire, Integer> colDuree;
 
-    @FXML private TextField tfDepart;
-    @FXML private TextField tfArrivee;
+    @FXML private ComboBox<Arret> cbDepart;
+    @FXML private ComboBox<Arret> cbArrivee;
     @FXML private TextField tfDuree;
 
     @FXML private Label lblInfo;
@@ -42,17 +43,20 @@ public class ItineraireController {
         colArrivee.setCellValueFactory(new PropertyValueFactory<>("villeArrivee"));
         colDuree.setCellValueFactory(new PropertyValueFactory<>("dureePrevue"));
 
-        data.setAll(dao.findAll());
-        table.setItems(data);
+        ObservableList<Arret> arrets = FXCollections.observableArrayList(dao.findAllArrets());
+        cbDepart.setItems(arrets);
+        cbArrivee.setItems(arrets);
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
             if (newV != null) {
-                tfDepart.setText(newV.getVilleDepart() == null ? "" : newV.getVilleDepart());
-                tfArrivee.setText(newV.getVilleArrivee() == null ? "" : newV.getVilleArrivee());
+                cbDepart.setValue(newV.getArretDepart());
+                cbArrivee.setValue(newV.getArretArrive());
                 tfDuree.setText(String.valueOf(newV.getDureePrevue()));
                 lblInfo.setText("");
             }
         });
+
+        refresh();
     }
 
     @FXML
@@ -64,115 +68,75 @@ public class ItineraireController {
 
     @FXML
     public void add() {
-        String depart = tfDepart.getText();
-        String arrivee = tfArrivee.getText();
+        Arret dep = cbDepart.getValue();
+        Arret arr = cbArrivee.getValue();
         Integer duree = parseDuree();
 
-        if (depart == null || depart.isBlank()
-                || arrivee == null || arrivee.isBlank()
-                || duree == null) {
+        if (dep == null || arr == null || duree == null) {
             lblInfo.setText("Champs invalides.");
             return;
         }
 
-        dao.findOrCreateArret(depart.trim());
-        dao.findOrCreateArret(arrivee.trim());
-
-        Itineraire iti = new Itineraire(0, duree);
-        iti.setVilleDepart(depart.trim());
-        iti.setVilleArrivee(arrivee.trim());
-
-        int id = dao.insertAndReturnId(iti);
-
-        if (id != -1) {
-            iti.setIdItineraire(id);
-            ItineraireDAO.enregistrerVilles(id, depart.trim(), arrivee.trim());
-
-            data.add(0, iti);
-            table.refresh();
-
-            lblInfo.setText("Ajout OK");
-            clearFormWithoutSelection();
-        } else {
-            lblInfo.setText("Ajout échoué");
-
-        }
+        Itineraire iti = new Itineraire(0, duree, dep, arr);
+        boolean ok = dao.insert(iti);
+        lblInfo.setText(ok ? "Ajout OK" : "Ajout échoué");
+        refresh();
+        clearForm();
     }
 
     @FXML
     public void update() {
         Itineraire selected = table.getSelectionModel().getSelectedItem();
-
         if (selected == null) {
             lblInfo.setText("Sélectionne un itinéraire.");
             return;
         }
 
-        String depart = tfDepart.getText();
-        String arrivee = tfArrivee.getText();
+        Arret dep = cbDepart.getValue();
+        Arret arr = cbArrivee.getValue();
         Integer duree = parseDuree();
 
-        if (depart == null || depart.isBlank()
-                || arrivee == null || arrivee.isBlank()
-                || duree == null) {
+        if (dep == null || arr == null || duree == null) {
             lblInfo.setText("Champs invalides.");
             return;
         }
 
-        dao.findOrCreateArret(depart.trim());
-        dao.findOrCreateArret(arrivee.trim());
-
-        selected.setVilleDepart(depart.trim());
-        selected.setVilleArrivee(arrivee.trim());
+        selected.setArretDepart(dep);
+        selected.setArretArrive(arr);
         selected.setDureePrevue(duree);
 
         boolean ok = dao.update(selected);
-
-        ItineraireDAO.enregistrerVilles(
-                selected.getIdItineraire(),
-                depart.trim(),
-                arrivee.trim()
-        );
-
-        table.refresh();
         lblInfo.setText(ok ? "Modification OK" : "Modification échouée");
+        table.refresh();
     }
 
     @FXML
     public void delete() {
         Itineraire selected = table.getSelectionModel().getSelectedItem();
-
         if (selected == null) {
             lblInfo.setText("Sélectionne un itinéraire.");
             return;
         }
 
-        boolean confirm = confirm("Supprimer l’itinéraire ID " + selected.getIdItineraire() + " ?");
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+        a.setTitle("Confirmation");
+        a.setHeaderText(null);
+        a.setContentText("Supprimer l'itinéraire ID " + selected.getIdItineraire() + " ?");
+        if (a.showAndWait().filter(b -> b == ButtonType.OK).isEmpty()) return;
 
-        if (!confirm) {
-            return;
-        }
-
-        boolean ok = selected.getIdItineraire() == 0 || dao.delete(selected.getIdItineraire());
-
-        if (ok) {
-            data.remove(selected);
-        }
-
+        boolean ok = dao.delete(selected.getIdItineraire());
         lblInfo.setText(ok ? "Suppression OK" : "Suppression échouée");
-        clearFormWithoutSelection();
+        if (ok) data.remove(selected);
+        clearForm();
     }
 
     @FXML
     public void clearForm() {
-        clearFormWithoutSelection();
-        table.getSelectionModel().clearSelection();
-    }
-
-    private void clearFormWithoutSelection() {
-        tfDepart.clear();
-        tfArrivee.clear();
+        cbDepart.setValue(null);
+        cbArrivee.setValue(null);
         tfDuree.clear();
+        table.getSelectionModel().clearSelection();
+        lblInfo.setText("");
     }
 
     @FXML
@@ -187,13 +151,5 @@ public class ItineraireController {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    private boolean confirm(String msg) {
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-        a.setTitle("Confirmation");
-        a.setHeaderText(null);
-        a.setContentText(msg);
-        return a.showAndWait().filter(b -> b == ButtonType.OK).isPresent();
     }
 }
