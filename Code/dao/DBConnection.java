@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public final class DBConnection {
 
     private static final String URL =
-            "jdbc:mysql://localhost:3306/snch_billetterie?serverTimezone=UTC";
-    private static final String USER = "snch_app";
-    private static final String PASSWORD = "snch1234";
+            "jdbc:mysql://mysql-victormelwig.alwaysdata.net:3306/victormelwig_snch?serverTimezone=UTC";
+    private static final String USER = "victormelwig";
+    private static final String PASSWORD = "SkaiMite83";
 
     private DBConnection() {}
 
